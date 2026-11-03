@@ -1,0 +1,15 @@
+name: SylvLift
+version: 1.0.0
+main: com.sylvarion.sylvlift.SylvLiftPlugin
+api-version: '26.3'
+description: Player-built elevators with animated platforms and doors.
+authors: [Sylvarion]
+commands:
+  sylvlift:
+    description: Manage SylvLift elevators.
+    usage: /sylvlift reload <id>
+    permission: sylvlift.reload
+permissions:
+  sylvlift.reload:
+    description: Rescan a lift for new floors.
+    default: op
