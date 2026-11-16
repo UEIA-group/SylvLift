@@ -3,7 +3,7 @@
 ## Project and build
 
 - SylvLift is a Java 25 plugin for Paper 26.3. Use supported Paper APIs; prefer current APIs over deprecated methods, reflection into server internals, or packet manipulation.
-- Use the Gradle wrapper, not Maven. Windows: `.\gradlew.bat build`; macOS/Linux: `./gradlew build`. The output is `build/libs/SylvLift.jar`.
+- Use the Gradle wrapper, not Maven. Windows: `.\gradlew.bat build`; macOS/Linux: `./gradlew build`. The output is `build/libs/SylvLiftv1.1.jar`.
 - `build.gradle` defines the Paper API version and Java toolchain. `src/main/resources/plugin.yml` defines commands, permissions, and the API version. Keep them consistent.
 - Production code is currently in `src/main/java/com/sylvarion/sylvlift/SylvLiftPlugin.java`. Ownership regression tests are in `src/test/java/com/sylvarion/sylvlift/LiftOwnershipTest.java`.
 - Some implementation was recovered from a supplied working JAR. Improve recovered local variable names when touching code, but avoid unrelated rewrites.
@@ -42,9 +42,9 @@
 ## Local test server and installation
 
 - `gradlew runServer` launches Paper 26.3 using `run/`. This directory contains the user's test worlds, lift configuration, and other plugins, including FAWE. Preserve that data.
-- The task uses run-paper's legacy plugin loading, which installs `run/plugins/SylvLift_RunServer_plugin.jar`. Do not also install `run/plugins/SylvLift.jar`: Paper reports an ambiguous duplicate plugin.
+- The task uses run-paper's legacy plugin loading, which installs `run/plugins/SylvLiftv1.1_RunServer_plugin.jar`. Do not also install `run/plugins/SylvLift.jar`: Paper reports an ambiguous duplicate plugin.
 - The task backs up a leftover manually installed `SylvLift.jar` into `build/plugin-backups/` before starting. Stop the existing server before relaunching so Windows file locks are released.
-- If the running JAR is locked, stage updates at `run/plugins/update/SylvLift_RunServer_plugin.jar` and tell the user a restart is required. Do not claim staged changes are already active.
+- If the running JAR is locked, stage updates at `run/plugins/update/SylvLiftv1.1_RunServer_plugin.jar` and tell the user a restart is required. Do not claim staged changes are already active.
 - Avoid Bukkit `/reload` for updates. Do not interrupt the user's running server or modify its worlds just to perform a build check. Use a separate run directory and port for isolated startup checks.
 - Reference JARs may be supplied in `src/main/resources/`. Preserve them as reference material, but exclude JAR files from processed resources so they are not nested in the built plugin.
 - Do not commit generated output, server worlds/configuration, Gradle caches, or unrelated IntelliJ metadata. Keep the Gradle wrapper files available in source control.

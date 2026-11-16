@@ -1,5 +1,5 @@
 name: SylvLift
-version: 1.0.0
+version: '1.1'
 main: com.sylvarion.sylvlift.SylvLiftPlugin
 api-version: '26.3'
 description: Player-built elevators with animated platforms and doors.

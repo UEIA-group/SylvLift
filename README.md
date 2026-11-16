@@ -1,8 +1,8 @@
-# SylvLift
+# SylvLift v1.1
 
 SylvLift is a Paper plugin for player-built elevators. It targets Paper 26.3
 and Java 25. With JDK 25 installed, build with `./gradlew build` (macOS/Linux)
-or `.\gradlew.bat build` (Windows) and install `build/libs/SylvLift.jar` in the
+or `.\gradlew.bat build` (Windows) and install `build/libs/SylvLiftv1.1.jar` in the
 server's `plugins` directory. The Gradle wrapper downloads Gradle automatically;
 the first build requires internet access to resolve dependencies.
 
