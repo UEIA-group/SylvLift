@@ -7,9 +7,14 @@ authors: [Sylvarion]
 commands:
   sylvlift:
     description: Manage SylvLift elevators.
-    usage: /sylvlift reload <id>
-    permission: sylvlift.reload
+    usage: /sylvlift <reload|delete|edit> <id>
 permissions:
   sylvlift.reload:
     description: Rescan a lift for new floors.
+    default: op
+  sylvlift.delete:
+    description: Delete a lift.
+    default: op
+  sylvlift.edit:
+    description: Edit lift floor names.
     default: op

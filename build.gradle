@@ -1,0 +1,62 @@
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
+plugins {
+    id 'java'
+    id 'xyz.jpenilla.run-paper' version '3.1.0'
+}
+
+group = 'com.sylvarion'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = uri('https://repo.papermc.io/repository/maven-public/')
+    }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:26.3.build.238-stable'
+    testImplementation 'io.papermc.paper:paper-api:26.3.build.238-stable'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-Xlint:deprecation')
+}
+
+tasks.named('jar') {
+    archiveFileName = 'SylvLift.jar'
+}
+
+tasks.named('processResources') {
+    exclude '**/*.jar'
+}
+
+tasks.named('runServer') {
+    minecraftVersion('26.3')
+    // Install the development JAR in plugins/ rather than loading a second copy with --add-plugin.
+    legacyPluginLoading()
+    doFirst {
+        // Retire the manually installed copy; run-paper manages its own filename.
+        def duplicate = runDirectory.file('plugins/SylvLift.jar').get().asFile
+        if (duplicate.exists()) {
+            def backup = layout.buildDirectory.file('plugin-backups/SylvLift-manual.jar').get().asFile
+            backup.parentFile.mkdirs()
+            Files.move(duplicate.toPath(), backup.toPath(), StandardCopyOption.REPLACE_EXISTING)
+        }
+    }
+}
